@@ -1,0 +1,6 @@
+.DS_STORE
+data
+cocoapi
+coco-dataset
+.ipynb_checkpoints
+*.tar
