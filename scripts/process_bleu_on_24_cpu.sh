@@ -14,7 +14,15 @@ for ((i=0;i<$1;i+=n)); do
         let end=$1
     fi
 
-    python process_bleu_score.py $2 $3 $i $end &
-    pid_array[$c]=$!
+    python process_bleu_score.py $2 $3 $i $end >/dev/null 2>&1 &
+    pids[${c}]=$!
     let c=c+1
 done
+
+for pid in ${pids[*]}; do 
+    wait $pid
+done;
+
+END=$(date +%s)
+DIFF=$(( $END - $START ))
+echo "It took $DIFF seconds"
